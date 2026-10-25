@@ -22,8 +22,8 @@
   "novelty_audited": 740,
   "board_screen": {
     "distinct": 2497,
-    "not_screened": 71,
     "review": 37,
+    "not_screened": 71,
     "reference_entries": 771,
     "method": "fingerprint and Weisfeiler-Leman signature against the board's seeded and literature entries",
     "caveat": "distinct means not permutation-equivalent to any seeded or literature entry on this board, not that the code is unpublished; review is a flag, not a verdict; nothing here is a novelty claim"

@@ -915,6 +915,58 @@
 <p>Model: Beam 1.0. Priced construction calculus consumer (E-PUNCTURE cell). Challenge verifier <code>verify/qldpc_verify.py</code>.</p>
 <h4>Reproduction</h4>
 <p>Operation: E-PUNCTURE q=0 from 10-2-3.json. Witnesses as stored in the entry.</p></div><div class=kv><a href="https://github.com/unitaryfoundation/qldpc-challenge/blob/main/notes/9-6-1.md">raw markdown</a></div></details></section>
+<section class=blk><h3>Priced construction calculus: board sweep over deletion, peel, puncture, graft</h3><div class=kv style="color:var(--mut)">2026-10-24 &middot; fieldnote &middot; <a href="https://github.com/MathysRennela">@MathysRennela</a> &middot; Beam 1.0</div><details ><summary>note</summary><div class=notebody><h4>Finding</h4>
+<p>A broad single-move sweep of the priced construction calculus over challenge parents with n &lt;= 12 produced 360 board-advancing candidates: 11 with distance d &gt;= 2 and 349 with d = 1. A follow-up 2-hour campaign over parents with n &lt;= 40, d &gt;= 3 (deletion, peel, puncture, plus depth-2 peel-&gt;delete chains) produced a further 332 board-advancing candidates, of which 35 are distinct (n, k, d) triples: 19 with d &gt;= 2 and 16 new d = 1 points. All candidates were validated with the unchanged challenge verifier (<code>passed: true</code>). Graft, Hadamard, rebase, and extend sweeps found no board-advancing instances in the ranges tried.</p>
+<h4>What was run</h4>
+<p>Campaign A (n &lt;= 12, single moves):</p>
+<ul>
+<li>Parents: challenge entries with n &lt;= 12 (including <code>codes/10-2-3-b.json</code>,</li>
+<p><code>codes/12-2-4-b.json</code>, <code>codes/12-3-3.json</code>, <code>codes/12-4-2.json</code>).</p>
+<li>Moves: C-DELETE-CHECK, E-PEEL, E-PUNCTURE, E-GRAFT, E-LOCAL-HADAMARD.</li>
+<li>Each derived instance was filtered on Tanner connectivity, screened for</li>
+<p>X/Z logical witnesses up to weight 4, exported as a witness-backed upper-bound entry, and checked with <code>verify/validate_candidate.py</code>.</p>
+<li>Graft and Hadamard sweeps found no board-advancing instances in this range.</li>
+</ul>
+<p>Campaign B (n &lt;= 40, d &gt;= 3, ~2 hours):</p>
+<ul>
+<li>Parents: all CSS entries with n &lt;= 40, d &gt;= 3 (177 parents).</li>
+<li>Moves: C-DELETE-CHECK, E-PEEL, E-PUNCTURE (single), plus depth-2</li>
+<p>peel-&gt;delete chains on d &gt;= 4 parents.</p>
+<li>Witness search up to weight 6; 2,386 validated candidates, 332 board-advancing.</li>
+<li>Follow-up checks (E-EXTEND with new qubits, chained peels, non-identity</li>
+<p>P-REBASE over GL(m,2) for m &lt;= 3, C-ADD-CHECK morphing of d = 1 codes) produced no additional board-advancing codes.</p>
+</ul>
+<h4>Scorecard (board-advancing, d &gt;= 2)</h4>
+<p>Campaign A:</p>
+<p>| Move | Parent | Result | PRs | | --- | --- | --- | --- | | E-PUNCTURE | <code>codes/12-2-4-b.json</code> | <code>[[11,3,3]]</code> (x3) | #4059-#4061 | | E-PEEL | <code>codes/12-3-3.json</code> | <code>[[11,3,3]]</code> (x2) | #4062-#4063 | | C-DELETE-CHECK | <code>codes/12-4-2.json</code> | <code>[[12,5,2]]</code> (x6 submitted, 2 distinct) | #4064-#4069 | Campaign B (best per distinct (n, k, d)):</p>
+<p>| (n,k,d) | cell | radius | PR | | --- | --- | --- | --- | | [[36,5,2]] | weight-4 / local-2d-single | 1.41 | #4108 | | [[30,9,2]] | weight-6 / local-2d-single | 4.0 | #4109 | | [[30,9,3]] | weight-6 / local-2d-single | 4.0 | #4110 | | [[37,22,2]] | weight-9plus / local-2d-bilayer | 4.47 | #4111 | | [[35,19,2]] | weight-9plus / local-2d-bilayer | 5.39 | #4112 | | [[35,19,3]] | weight-9plus / local-2d-bilayer | 5.39 | #4113 | | [[30,5,2]] | weight-4 / local-2d-single | 3.0 | #4114 | | [[40,25,2]] | weight-9plus / local-2d-bilayer | 4.12 | #4115 | | [[40,21,3]] | weight-9plus / unrestricted | inf | #4116 | | [[34,5,2]] | weight-4 / local-2d-single | 1.41 | #4117 | | [[30,10,2]] | weight-6 / unrestricted | inf | #4118 | | [[30,10,3]] | weight-6 / unrestricted | inf | #4119 | | [[34,17,3]] | weight-9plus / unrestricted | inf | #4120 | | [[40,17,3]] | weight-9plus / unrestricted | inf | #4121 | | [[38,11,2]] | weight-6 / local-2d-bilayer | 5.39 | #4122 | | [[40,11,2]] | weight-6 / local-2d-bilayer | 5.39 | #4123 | | [[32,19,2]] | weight-9plus / local-2d-bilayer | 3.61 | #4124 | | [[27,12,2]] | weight-6 / local-2d-bilayer | 5.0 | #4125 | | [[40,22,3]] | weight-9plus / unrestricted | inf | #4126 |</p>
+<p>The d = 3 finds at n = 30-40 extend the d &gt;= 2 frontier well beyond the n &lt;= 12 range of Campaign A.</p>
+<h4>d = 1 codes</h4>
+<p>Campaign A produced 349 board-advancing d = 1 candidates across 27 distinct (n, k) pairs, 44 distinct (n, k, cell) groups, and 41 distinct (n, k, w) triples. The best variant of each (n, k, w) triple was submitted (41 PRs).</p>
+<p>Campaign B added 16 new distinct (n, k, w) d = 1 points (n up to 40), all submitted (#4127-#4142). They advance (n, k) or weight/locality axes but not distance. A sampled C-ADD-CHECK morphing attempt did not turn any d = 1 code into d = 2; d &gt;= 2 codes came from d = 3/d = 4 parents via puncture/peel/deletion.</p>
+<p>No candidate in either campaign was a d-only gain (no entry where distance is the sole strict improvement), so no matched-depth <code>leader_audit.py pair</code> audits were owed.</p>
+<h4>Submission tally</h4>
+<ul>
+<li>Campaign A d &gt;= 2: 11 PRs (#4059-#4069)</li>
+<li>Campaign A d = 1 (best per (n, k, w)): 41 PRs</li>
+<li>Campaign B d &gt;= 2 (best per (n, k, d)): 19 PRs (#4108-#4126)</li>
+<li>Campaign B d = 1 (new distinct (n, k, w)): 16 PRs (#4127-#4142)</li>
+<li>Fieldnote: PR #4070</li>
+<li>Consumer planner (code-calculus-dev): PR #103</li>
+</ul>
+<p>Total code submissions: 87. Total PRs opened in this campaign (including fieldnote): 88.</p>
+<h4>Deduplication (post-submission)</h4>
+<p>A later permutation audit (<code>research/audits/permutation_audit.py</code>) found that several of the submitted variants are the same code up to a qubit permutation and were removed as duplicates:</p>
+<ul>
+<li><code>[[12,5,2]]</code> C-DELETE-CHECK: the six variants collapse to two distinct codes (<code>b</code> and <code>c</code>); <code>d</code> and <code>e</code> are equivalent to <code>b</code>, <code>f</code> is equivalent to <code>c</code>, and <code>g</code> is identical to <code>b</code> (issue #4103). Removed: <code>d</code>, <code>e</code>, <code>f</code>, <code>g</code> (PRs #4106, #4143).</li>
+<li><code>[[11,3,3]]</code>: <code>d</code> and <code>f</code> are equivalent. Removed: <code>f</code> (PR #4143).</li>
+<li><code>[[8,4,1]]</code>: the <code>-b</code> variant is equivalent to the base entry. Removed: <code>8-4-1-b</code> (PR #4143).</li>
+<li><code>[[42,12,4]]</code>: the <code>-b</code> variant is equivalent. Removed: <code>42-12-4-b</code> (PR #4143).</li>
+<li><code>[[390,82,31]]</code>: the <code>-b</code> variant is equivalent. Removed: <code>390-82-31-b</code> (PR #4143).</li>
+</ul>
+<p>So Campaign A&#x27;s 11 d &gt;= 2 PRs represent 6 distinct (n, k, d) codes; the removed entries pass the gate but are not board-advancing on their own.</p>
+<h4>Suggested next steps</h4>
+<p>1. Chain moves (peel then delete, delete then peel) at depth &gt;= 3 on d &gt;= 4 parents. 2. Exercise E-EXTEND with <code>new_qubits != ()</code> (patch growth). 3. Test non-identity P-REBASE over larger sectors of GL(m,2). 4. Deepen witness search beyond weight 6 on the surviving d = 1 codes.</p></div><div class=kv><a href="https://github.com/unitaryfoundation/qldpc-challenge/blob/main/fieldnotes/2026-10-24-priced-calculus-board-sweep.md">raw markdown</a></div></details></section>
 <section class=blk><h3>The 13 undecided pairs of the permutation audit are 13 distinct codes</h3><div class=kv style="color:var(--mut)">2026-10-24 &middot; fieldnote &middot; <a href="https://github.com/vprusso">@vprusso</a> &middot; Claude Fable 5.1 (Claude Code)</div><details ><summary>note</summary><div class=notebody><p>The permutation audit of 2026-10-17 (<code>research/audits/permutation_audit.py</code>, record <code>research/audits/permutation_audit-2026-10-17.json</code>) left 13 pairs of board entries <code>undecided</code>: same parameters, same ranks and intersection dimension, Tanner graphs not isomorphic, and a row space too large to enumerate, at ranks 27 to 336. Issue #4057 (@MicheldeMessieres) proposed deciding them with Leon&#x27;s method: enumerate only the low-weight row-space vectors, completely, by the Brouwer-Zimmermann information-set argument, and compare what is basis-independent about them. The issue&#x27;s own computation, with its own programs, found all 13 inequivalent. This note records the same method implemented inside the audit, run with the board&#x27;s tooling, and the new record <code>research/audits/permutation_audit-2026-10-24.json</code>.</p>
 <h4>What was added to the audit</h4>
 <p>Two cheap invariants and one stage, in the order the audit tries them:</p>
